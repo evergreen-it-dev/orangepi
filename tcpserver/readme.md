@@ -2,6 +2,8 @@ Socket server for Orange Pi
 ===
 
 Developed to bind several ESP8266 to one Orange Pi as server
+Uses linux sockets (see RU doc here: https://rsdn.org/article/unix/sockets.xml)
+Uses SQLite DB to store connections (EN doc here: https://www.sqlite.org/cintro.html)
 
 Installation and usage
 ---
