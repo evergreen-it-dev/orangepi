@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <time.h>       /* clock_t, clock, CLOCKS_PER_SEC */
 #include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,7 +42,8 @@ static int callback(void *NotUsed, int argc, char **argv, char **szColName)
 char response[] = "{\"success\":1}\n";
 
 int main() {
-
+    std::clock_t ts,tn;
+    ts = std::clock();
     printf ("Server started\r\n");
 
     sqlite3 *db;
@@ -96,6 +98,8 @@ int main() {
     }
 
     listen(listener, 1); //1 это длина очереди на соединение сокета
+    tn=std::clock()-ts;
+    printf ("To start socket and DB connection: %f seconds",((float)tn)/CLOCKS_PER_SEC);
 
     while(1)//infinite listening
     {
