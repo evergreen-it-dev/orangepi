@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <time.h>       /* clock_t, clock, CLOCKS_PER_SEC */
-#include <netinet/in.h>
+#include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -15,6 +15,8 @@
 
 
 #define PORT 9000
+#define CLIENT_IP "192.168.0.157"
+int local_socket=0; //change to 1 to test locally, 0 to test remotely
 
 
 char message[] = "{\"param\":1}";
@@ -39,7 +41,11 @@ int main()
 
     addr.sin_family = AF_INET;
     addr.sin_port = htons(PORT); // или любой другой порт...
-    addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+    if(local_socket==1)
+        addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK); //local
+    else
+        inet_pton(AF_INET, CLIENT_IP, &addr.sin_addr.s_addr); //remote
+
     if(connect(sender, (struct sockaddr *)&addr, sizeof(addr)) < 0)
     {
         perror("connect");
