@@ -11,12 +11,15 @@ Installation and usage
 sudo apt-get install sqlite3 libsqlite3-dev 
 sudo apt-get install libboost-all-dev
 #clone repo from git
-mkdir /var/iot/src/tcpserver
+mkdir -p /var/iot/src/
+cd /var/iot/src/
 git clone https://github.com/evergreen-it-dev/orangepi.git
-#goto your dir
-cd /var/iot/src/tcpserver
+cd /var/iot/src/orangepi/tcpserver/
+mkdir -p /var/iot/tcpserver
 #make
 make all
+#goto work dir
+cd /var/iot/tcpserver/
 ```
 
 Then you can run server and client
