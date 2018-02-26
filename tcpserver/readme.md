@@ -7,8 +7,9 @@ Installation and usage
 ---
 
 ```
-#install sqlite
-sudo apt-get install sqlite
+#install sqlite and boost
+sudo apt-get install sqlite3 libsqlite3-dev 
+sudo apt-get install libboost-all-dev
 #clone repo from git
 mkdir /var/iot/src/tcpserver
 git clone https://github.com/evergreen-it-dev/orangepi.git
@@ -17,3 +18,24 @@ cd /var/iot/src/tcpserver
 #make
 make all
 ```
+
+Then you can run server and client
+
+```
+.\server
+```
+client should run as separate process (it is only test client! replace it with your own!)
+```
+.\client
+```
+
+To check you db manually use
+
+```
+sqlite3 iot.db
+```
+in sqlite use following syntax to test
+sqlite> SELECT * FROM Connections;
+
+
+
